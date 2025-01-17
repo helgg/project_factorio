@@ -1,0 +1,15 @@
+
+
+{% if user.is_authenticated %}
+<div class="admin-button-fixed">
+    <a href="/admin/" class="ui-btn"> <span>Admin</span></a>
+</div>
+{% endif %} 
+<div class="header">
+
+<div class="clock">{{ complete_date}}</div>
+    <h3>
+        <a href="{% url "app:home" %}">Factorio Blog</a>  
+    </h3>
+    <p>Dicas, truques e sacadas para ajudar você a dominar o jogo.</p>
+</div>

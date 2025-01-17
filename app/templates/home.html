@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% include "includes/header.html" %}
+
+    <div class="features">
+  
+        <a href="{% url "app:blogs" %}" class="feature" style="text-decoration: none;">
+          <h3>Blog</h3>
+          <p>Saiba o que há de novo!</p>
+        </a>
+
+        <div class="feature">
+            <h3>Dicas</h3>
+            <p>Discas para não apanhar do jogo.</p>
+        </div>
+        <a href="{% url "app:post" %}" class="feature" style="text-decoration: none;">
+            <h3>Participe</h3>
+            <p>Colabore com o portal. Envie uma blueprint ou dica.</p>
+        </a>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 heldergg. Segura eu! 😝.</p>
+    </footer>
+{% endblock %}

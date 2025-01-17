@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+    <div class="admin-button-fixed">
+        <a href="/admin/" class="ui-btn"> <span>Admin</span></a>
+    </div>
+    {% endif %} 
+    <div class="header">
+        <h3>
+            <a href="{% url "app:home" %}">Blogs</a>            
+        </h3>
+        <p>Últimas postagens.</p>
+    </div>
+    <div class="features">
+    {% comment %} {% for post in object_list %} {% endcomment %}
+    {% for post in posts %}
+        <a class="feature" href="{% url 'app:article' post.pk %}" style="text-decoration: none;">
+            <h3>{{ post.title|truncatewords:10 }}</h3>
+            <p>{{ post.content|truncatewords:10 }}</p><br/>
+            <div class="bottom-card">
+                <p>Autor: {{ post.autor.username }}</p>
+                <p>Views: {{ post.views }}</p>
+                <p>Criado em: {{ post.create_at|date:"d/m/Y H:i" }}</p>
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+
+    
+    <footer>
+        <p>&copy; 2025 heldergg. Segura eu! 😝.</p>
+    </footer>
+    {% endblock %}
+

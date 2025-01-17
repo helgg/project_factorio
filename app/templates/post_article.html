@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="admin-button-fixed">
+    <a href="/admin/" class="ui-btn"> <span>Admin</span></a>
+</div>
+{% endif %} 
+<div class="header">
+
+<div class="clock">{{ complete_date}}</div>
+    <h3>
+        <a href="{% url "app:blogs" %}">Blogs</a>  
+    </h3>
+    <p>Faça a sua postagem.</p>
+</div>
+
+<div class="features">
+    <form action="{% url 'app:post-blog' %}" method='post'>
+        {% csrf_token %}
+        <label for="">Título</label>
+        {{forms.title}}<br>
+        <label for="">Post</label>
+        {{forms.content}}
+        <button type="submit" >Enviar</button>
+    </form>
+</div>
+
+
+
+{% endblock %}
