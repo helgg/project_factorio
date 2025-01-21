@@ -2,7 +2,7 @@
 import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Blog
+from .models import Blog, BlogView
 from .forms import BlogForm
 # from django.views.generic import ListView, DetailView
 
@@ -31,14 +31,23 @@ def make_a_post(request):
 #     template_name = 'blogs.html'
 #     context_object_name = 'posts'
 
-def blog_article(request, pk):
 
+def blog_article(request, pk):
     post = get_object_or_404(Blog, pk=pk)  
 
     post.views += 1
-    post.save(update_fields=['views'])
 
-    # post = get_object_or_404(Blog, pk=pk)  
+    if request.user.is_authenticated:       
+        _, created = BlogView.objects.get_or_create(user=request.user, blog=post)
+        if created:  
+            post.unique_views += 1
+    else:    
+        if 'blog_viewed_{}'.format(post.id) not in request.session:
+            request.session['blog_viewed_{}'.format(post.id)] = True
+            post.anonymous_views += 1
+
+    post.save(update_fields=['views', 'unique_views', 'anonymous_views'])
+
     context = {}
     context['post'] = post
     return render(request, 'blog_post.html', context)

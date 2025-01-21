@@ -1,26 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% include "includes/header.html" %}
 
-    <div class="features">
-  
-        <a href="{% url "app:blogs" %}" class="feature" style="text-decoration: none;">
-          <h3>Blog</h3>
-          <p>Saiba o que há de novo!</p>
-        </a>
 
-        <div class="feature">
-            <h3>Dicas</h3>
-            <p>Discas para não apanhar do jogo.</p>
-        </div>
-        <a href="{% url "app:post" %}" class="feature" style="text-decoration: none;">
-            <h3>Participe</h3>
-            <p>Colabore com o portal. Envie uma blueprint ou dica.</p>
-        </a>
+<div class="rounded-lg border shadow-sm bg-white border-stone-200 shadow-stone-950/5 relative flex h-[calc(100vh-6rem)] mt-1 w-full flex-col items-end justify-center overflow-hidden text-center max-w-screen-xl mx-auto">
+    <div class="h-max rounded m-2">
+      <div class="absolute inset-0 m-0 h-full w-full rounded-none bg-[url('https://thunderkeys.com/cdn/shop/files/Factorio_4.jpg?v=1717498098&width=1920')] bg-cover bg-center">
+        <div class="absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/50 to-black/10 dark:from-black/90 dark:via-black/60 dark:to-black/20"></div>
+      </div>
     </div>
-    
-    <footer>
-        <p>&copy; 2025 heldergg. Segura eu! 😝.</p>
-    </footer>
+    <div class="w-full rounded relative bottom-0 flex h-full flex-col items-center justify-center px-6 py-14 md:px-12">
+      <h4 class="font-sans antialiased font-bold text-xl md:text-2xl lg:text-3xl text-white">Automação sem limites, estratégia sem igual</h4>
+      <h6 class="font-sans antialiased font-bold text-base md:text-lg lg:text-xl my-6 text-white/80">Helder G. G.</h6>
+      <img src="https://media.licdn.com/dms/image/v2/C4D03AQENo8ATC3M9NQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1528210070671?e=1743033600&v=beta&t=-PIFAFmONajSMfpupNS6FciaIe6Lf-2ioLSVs-5uL7o" alt="tania andrew" class="inline-block object-cover object-center w-20 h-20 rounded-lg border-2 border-white" />
+    </div>
+  </div>
+
 {% endblock %}

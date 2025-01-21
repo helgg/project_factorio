@@ -1,35 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
 
-    {% if user.is_authenticated %}
-    <div class="admin-button-fixed">
-        <a href="/admin/" class="ui-btn"> <span>Admin</span></a>
-    </div>
-    {% endif %} 
-    <div class="header">
-        <h3>
-            <a href="{% url "app:home" %}">Blogs</a>            
-        </h3>
-        <p>Últimas postagens.</p>
-    </div>
-    <div class="features">
+
+
+<div class="blog-grid max-w-screen-xl mx-auto mt-1">
+
     {% comment %} {% for post in object_list %} {% endcomment %}
     {% for post in posts %}
-        <a class="feature" href="{% url 'app:article' post.pk %}" style="text-decoration: none;">
-            <h3>{{ post.title|truncatewords:10 }}</h3>
-            <p>{{ post.content|truncatewords:10 }}</p><br/>
-            <div class="bottom-card">
-                <p>Autor: {{ post.autor.username }}</p>
-                <p>Views: {{ post.views }}</p>
-                <p>Criado em: {{ post.create_at|date:"d/m/Y H:i" }}</p>
-            </div>
-        </a>
-    {% endfor %}
-    </div>
 
-    
-    <footer>
-        <p>&copy; 2025 heldergg. Segura eu! 😝.</p>
-    </footer>
-    {% endblock %}
+
+    <a href="{% url 'app:article' post.pk %}" class="feature" style="text-decoration: none;">
+  
+        <div class="w-full rounded-lg border shadow-sm bg-white border-stone-200 shadow-stone-950/5 max-w-[24rem] overflow-hidden">
+            <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000056818/c700b4cc22a81c2099335d83fe379e9cdc6afd190a9985f74ba8f7e589f4ffd2" alt="ui/ux review check" class="w-[calc(100%-16px)] h-max rounded m-2" />
+            <div class="w-full h-max rounded px-3.5 py-2.5">
+            <h6 class="font-sans antialiased font-bold text-base md:text-lg lg:text-xl text-current">{{ post.title|truncatewords:10 }}</h6>
+            <p class="font-sans antialiased text-base mt-1 text-stone-600">{{ post.content|truncatewords:15 }}</p>
+            </div>
+            <div class="w-full px-3.5 pt-2 pb-3.5 rounded mt-4 flex items-center justify-between">
+            <div class="flex items-center -space-x-3">
+                <button class="outline-none group">
+                <img src="https://t3.ftcdn.net/jpg/06/95/84/12/360_F_695841244_ahT1GEYsQjjomgyiDUjAlOLfpRD5fjso.jpg" alt="natali craig" class="inline-block object-cover object-center w-9 h-9 rounded border-2 border-stone-200 hover:z-10" />
+                </button>
+                <button class="outline-none group">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9pfBaCNEmCGbuDML0VO-8mBAIDjTZrWq8Gw&s" alt="tania andrew" class="inline-block object-cover object-center w-9 h-9 rounded border-2 border-stone-200 hover:z-10" />
+                </button>
+            </div>
+            <small class="font-sans antialiased text-sm text-current">Views: {{ post.views }}</small>
+            <small class="font-sans antialiased text-sm text-current">{{ post.create_at|date:"F d" }}</small>
+            </div>
+        </div>
+    </a>  
+    {% endfor %}
+</div>
+{% endblock %}
 

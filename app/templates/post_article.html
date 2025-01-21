@@ -1,28 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% if user.is_authenticated %}
-<div class="admin-button-fixed">
-    <a href="/admin/" class="ui-btn"> <span>Admin</span></a>
-</div>
-{% endif %} 
-<div class="header">
 
-<div class="clock">{{ complete_date}}</div>
-    <h3>
-        <a href="{% url "app:blogs" %}">Blogs</a>  
-    </h3>
-    <p>Faça a sua postagem.</p>
-</div>
-
-<div class="features">
+<div class="max-w-screen-xl mx-auto">
     <form action="{% url 'app:post-blog' %}" method='post'>
         {% csrf_token %}
-        <label for="">Título</label>
-        {{forms.title}}<br>
-        <label for="">Post</label>
-        {{forms.content}}
-        <button type="submit" >Enviar</button>
+        <label class="font-sans antialiased text-sm text-stone-800 dark:text-black font-semibold">Título</label>
+        <div class="relative w-full">
+            {{forms.title}}
+        </div>
+        
+        <br>
+
+        <label class="font-sans antialiased text-sm text-stone-800 dark:text-black font-semibold">Post</label>
+        <div class="relative w-full">
+            {{forms.content}}
+        </div>
+        <button type="submit" class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased">Enviar</button>
     </form>
 </div>
 
