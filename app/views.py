@@ -4,7 +4,6 @@ import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Blog, BlogView
 from .forms import BlogForm
-# from django.views.generic import ListView, DetailView
 
 
 def home(request):
@@ -18,7 +17,6 @@ def blogs(request):
     posts = Blog.objects.all().order_by('-create_at')  
     context = {}
     context['posts'] = posts
-    # context['forms'] = BlogForm()
     return render(request, 'blogs.html', context)
 
 def make_a_post(request):
@@ -26,37 +24,30 @@ def make_a_post(request):
     context['forms'] = BlogForm()
     return render(request, 'post_article.html', context)
 
-# class BlogsList(ListView):
-#     model = Blog
-#     template_name = 'blogs.html'
-#     context_object_name = 'posts'
-
 
 def blog_article(request, pk):
-    post = get_object_or_404(Blog, pk=pk)  
 
-    post.views += 1
+    if request.user.is_authenticarted:
+        try:
+            BlogView.objects.get(user=request.user, blog=pk)
+            blog = Blog.objects.get(id=pk)
+        
+        except Exception:
+            blog = Blog.objects.get(id=pk)
+            BlogView.objects.create(user=request.user, blog=blog)
+            blog.unique_views += 1
+            blog.views = blog.unique_views + blog.anonymous_views
+    else:
+        blog = Blog.objects.get(id=pk)
+        blog.anonymous_views += 1
 
-    if request.user.is_authenticated:       
-        _, created = BlogView.objects.get_or_create(user=request.user, blog=post)
-        if created:  
-            post.unique_views += 1
-    else:    
-        if 'blog_viewed_{}'.format(post.id) not in request.session:
-            request.session['blog_viewed_{}'.format(post.id)] = True
-            post.anonymous_views += 1
-
-    post.save(update_fields=['views', 'unique_views', 'anonymous_views'])
+    blog.views = blog.unique_views + blog.anonymous_views
+    blog.save(update_fields=['views', 'unique_views', 'anonymous_views'])
 
     context = {}
-    context['post'] = post
+    context['post'] = blog
     return render(request, 'blog_post.html', context)
 
-
-# class BlogPostView(DetailView):
-#     model = Blog
-#     template_name = 'blog_post.html'
-#     context_object_name = 'post'
 
 def blog_register(request):
     form = BlogForm(request.POST)
