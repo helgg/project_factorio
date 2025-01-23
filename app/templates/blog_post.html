@@ -1,40 +1,52 @@
-{% extends "base.html" %}
-{% block content %}
-
+{% extends "base.html" %} {% block content %}
 
 <div class="max-w-screen-xl mx-auto my-1 p-6 bg-white rounded-lg shadow-md">
-    
-    <!-- Cabeçalho com botão de voltar -->
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold">{{ post.title }}</h1>
-      <a href="{% url 'app:blogs' %}"class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased">
-        Voltar
-      </a>
-    </div>
-
-    <!-- Imagem do artigo https://i.ytimg.com/vi/QzG_ITr3VfQ/maxresdefault.jpg-->
-    {% if post.thumbnail %}
-      <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="w-full h-auto rounded-lg mb-6">
-    {% else %}
-      <img src="https://i.ytimg.com/vi/QzG_ITr3VfQ/maxresdefault.jpg" alt="Thumbnail padrão">
-    {% endif %}
-    
-    <!-- Data e autor -->
-    <div class="text-sm text-gray-500 mb-4">
-      <p>Escrito por 
-        {% if post.autor %}
-          <span class="font-semibold">{{ post.autor}}</span>
-        {% else %}
-          <span class="font-semibold">Anônimo</span>
-        {% endif %}
-         em {{ post.create_at|date:"F d" }}</p>
-    </div>
-
-    <!-- Conteúdo do artigo -->
-    <article class="text-lg leading-relaxed space-y-4">
-        <p>{{post.content}}</p>
-    </article>
+  <!-- Cabeçalho com botão de voltar -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">{{ post.title }}</h1>
+    <a
+      href="{% url 'app:blogs' %}"
+      class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased"
+    >
+      Voltar
+    </a>
   </div>
 
-{% endblock %}
+    <div>
+      <!-- Imagem do artigo https://i.ytimg.com/vi/QzG_ITr3VfQ/maxresdefault.jpg-->
+      {% if post.thumbnail %}
+      <img
+        src="{{ post.thumbnail.url }}"
+        alt="{{ post.title }}"
+        class="w-96 h-auto rounded-lg mb-6"
+      />
+      {% else %}
+      <img
+        src="https://i.ytimg.com/vi/QzG_ITr3VfQ/maxresdefault.jpg"
+        alt="Thumbnail padrão"
+        class="w-96 h-auto rounded-lg mb-6"
+      />
+      {% endif %}
+    </div>
 
+    <!-- Data e autor -->
+    <div>
+      <div class="text-sm text-gray-500 mb-4">
+        <p>
+          Escrito por {% if post.autor %}
+          <span class="font-semibold">{{ post.autor}}</span>
+          {% else %}
+          <span class="font-semibold">Anônimo</span>
+          {% endif %} em {{ post.create_at|date:"F d" }}
+        </p>
+      </div>
+
+      <!-- Conteúdo do artigo -->
+      <article class="text-lg leading-relaxed space-y-4">
+        <p>{{post.content}}</p>
+      </article>
+    </div>
+
+</div>
+
+{% endblock %}

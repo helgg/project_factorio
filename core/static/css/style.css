@@ -21,3 +21,16 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 0.5rem;
 }
+
+.custom-form textarea {
+    width: -webkit-fill-available;
+    border: solid #989898 1px;
+}
+.custom-form input {
+    width: -webkit-fill-available;
+    border: solid #989898 1px;
+}
+
+.image-blog img {
+    width: 100px;
+}
