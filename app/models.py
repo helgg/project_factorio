@@ -12,7 +12,7 @@ class Blog(models.Model):
     unique_views = models.PositiveIntegerField(default=0)
     anonymous_views = models.PositiveIntegerField(default=0)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    thumbnail = models.ImageField(upload_to='thumbnails/', null=True, blank=True)  
+    thumbnail = models.ImageField(upload_to='thumbnails/', null=True, blank=True, default='https://t3.ftcdn.net/jpg/06/95/84/12/360_F_695841244_ahT1GEYsQjjomgyiDUjAlOLfpRD5fjso.jpg')  
 
     def __str__(self):
         # retorna o nome bonitinho do objeto no admin

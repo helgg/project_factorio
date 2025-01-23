@@ -11,24 +11,32 @@
 
     <a href="{% url 'app:article' post.pk %}" class="feature" style="text-decoration: none;">
   
-        <div class="w-full rounded-lg border shadow-sm bg-white border-stone-200 shadow-stone-950/5 max-w-[24rem] overflow-hidden">
+        <div class="w-full h-full rounded-lg border shadow-sm bg-white border-stone-200 shadow-stone-950/5 max-w-[24rem] overflow-hidden">
             <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000056818/c700b4cc22a81c2099335d83fe379e9cdc6afd190a9985f74ba8f7e589f4ffd2" alt="ui/ux review check" class="w-[calc(100%-16px)] h-max rounded m-2" />
-            <div class="w-full h-max rounded px-3.5 py-2.5">
-            <h6 class="font-sans antialiased font-bold text-base md:text-lg lg:text-xl text-current">{{ post.title|truncatewords:10 }}</h6>
-            <p class="font-sans antialiased text-base mt-1 text-stone-600">{{ post.content|truncatewords:15 }}</p>
-            </div>
-            <div class="w-full px-3.5 pt-2 pb-3.5 rounded mt-4 flex items-center justify-between">
-            <div class="flex items-center -space-x-3">
-                <button class="outline-none group">
-                <img src="https://t3.ftcdn.net/jpg/06/95/84/12/360_F_695841244_ahT1GEYsQjjomgyiDUjAlOLfpRD5fjso.jpg" alt="natali craig" class="inline-block object-cover object-center w-9 h-9 rounded border-2 border-stone-200 hover:z-10" />
-                </button>
-                <button class="outline-none group">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9pfBaCNEmCGbuDML0VO-8mBAIDjTZrWq8Gw&s" alt="tania andrew" class="inline-block object-cover object-center w-9 h-9 rounded border-2 border-stone-200 hover:z-10" />
-                </button>
-            </div>
-            <small class="font-sans antialiased text-sm text-current">Views: {{ post.views }}</small>
-            <small class="font-sans antialiased text-sm text-current">{{ post.create_at|date:"F d" }}</small>
-            </div>
+
+            <!-- Título e resumo da postagem -->
+        
+                <div class="w-full h-max rounded px-3.5 py-2.5">
+                    <h6 class="font-sans antialiased font-bold text-base md:text-lg lg:text-xl text-current line-clamp-1">{{ post.title }}</h6>
+                    <p class="font-sans antialiased text-base mt-1 text-stone-600 line-clamp-1">{{ post.content }}</p>
+                </div>
+                <div class="w-full px-3.5 pt-2 pb-3.5 rounded mt-4 flex items-center justify-between">
+
+                    <!-- Profiles dos usuarios que leram o post TODO -->
+                    <div class="flex items-center -space-x-3">
+                        <button class="outline-none group">
+                            <img src="https://t3.ftcdn.net/jpg/06/95/84/12/360_F_695841244_ahT1GEYsQjjomgyiDUjAlOLfpRD5fjso.jpg" alt="natali craig" class="inline-block object-cover object-center w-9 h-9 rounded border-2 border-stone-200 hover:z-10" />
+                        </button>
+                        <button class="outline-none group">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9pfBaCNEmCGbuDML0VO-8mBAIDjTZrWq8Gw&s" alt="tania andrew" class="inline-block object-cover object-center w-9 h-9 rounded border-2 border-stone-200 hover:z-10" />
+                        </button>
+                    </div>
+
+                    <!-- Contador de views e data de publicação -->
+                    <small class="font-sans antialiased text-sm text-current">Views: {{ post.views }}</small>
+                    <small class="font-sans antialiased text-sm text-current">{{ post.create_at|date:"F d" }}</small>
+                </div>
+          
         </div>
     </a>  
     {% endfor %}

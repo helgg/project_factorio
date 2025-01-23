@@ -27,7 +27,7 @@ def make_a_post(request):
 
 def blog_article(request, pk):
 
-    if request.user.is_authenticarted:
+    if request.user.is_authenticated:
         try:
             BlogView.objects.get(user=request.user, blog=pk)
             blog = Blog.objects.get(id=pk)
@@ -42,7 +42,7 @@ def blog_article(request, pk):
         blog.anonymous_views += 1
 
     blog.views = blog.unique_views + blog.anonymous_views
-    blog.save(update_fields=['views', 'unique_views', 'anonymous_views'])
+    blog.save()
 
     context = {}
     context['post'] = blog
@@ -50,11 +50,14 @@ def blog_article(request, pk):
 
 
 def blog_register(request):
-    form = BlogForm(request.POST)
+    form = BlogForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
             form = form.save(commit=False)
-            form.autor = request.user
+            if request.POST.get('anonymous'):
+                form.autor = None
+            else:
+                form.autor = request.user
             form.save()            
     return redirect('app:blogs')
 
