@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Blog, BlogView
+from .models import Blog, BlogView, Profile
 
 # Register your models here.
 
@@ -9,4 +9,8 @@ class BlogAdmin(admin.ModelAdmin):
 
 @admin.register(BlogView)
 class BlogAdmin(admin.ModelAdmin):
+    ...
+
+@admin.register(Profile)
+class Profile(admin.ModelAdmin):
     ...

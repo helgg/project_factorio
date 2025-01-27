@@ -12,10 +12,9 @@ class Blog(models.Model):
     unique_views = models.PositiveIntegerField(default=0)
     anonymous_views = models.PositiveIntegerField(default=0)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    thumbnail = models.ImageField(upload_to='thumbnails/', null=True, blank=True, default='https://t3.ftcdn.net/jpg/06/95/84/12/360_F_695841244_ahT1GEYsQjjomgyiDUjAlOLfpRD5fjso.jpg')  
+    thumbnail = models.ImageField(upload_to='thumbnails/', null=True, blank=True)  
 
     def __str__(self):
-        # retorna o nome bonitinho do objeto no admin
         return self.title + ' - ' + str(self.autor)
 
     class Meta:
@@ -28,12 +27,31 @@ class BlogView(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)  
 
     def __str__(self):
-        # retorna o nome bonitinho do objeto no admin
         return str(self.user) + ' - ' + str(self.blog)
 
     class Meta:
         unique_together = ('user', 'blog')
         db_table = "BlogView"
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    bio_details = models.TextField()
+    profile_photo = models.ImageField(upload_to='profiles/', null=True, blank=True) 
+
+    @property
+    def blog_count(self):
+        return Blog.objects.filter(autor=self.user).count()
+    
+    def __str__(self):
+         return f"{self.first_name} {self.last_name}"
+    
+    class Meta:
+        db_table = "Profile"
+
+
     
 
 

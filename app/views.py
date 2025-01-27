@@ -2,16 +2,17 @@
 import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Blog, BlogView
+from .models import Blog, BlogView, Profile
 from .forms import BlogForm
 
-
+# renderiza a home
 def home(request):
     now = datetime.datetime.now()
     context = {}
     context['complete_date'] = now.strftime("%c")
     return render(request, 'home.html', context)
 
+# renderiza o catalogo de blogs (postagens)
 def blogs(request):
 
     posts = Blog.objects.all().order_by('-create_at')  
@@ -19,12 +20,13 @@ def blogs(request):
     context['posts'] = posts
     return render(request, 'blogs.html', context)
 
+# renderiza o form de postagem
 def make_a_post(request):
     context = {}
     context['forms'] = BlogForm()
     return render(request, 'post_article.html', context)
 
-
+# renderiza o artigo blog
 def blog_article(request, pk):
 
     if request.user.is_authenticated:
@@ -43,7 +45,6 @@ def blog_article(request, pk):
 
     blog.views = blog.unique_views + blog.anonymous_views
     blog.save()
-
     context = {}
     context['post'] = blog
     return render(request, 'blog_post.html', context)
@@ -60,6 +61,38 @@ def blog_register(request):
                 form.autor = request.user
             form.save()            
     return redirect('app:blogs')
+
+
+def profile(request):
+    user = Profile.objects.get(user=request.user)
+    blogs = Blog.objects.filter(autor=request.user.id)
+    context = {}
+    context['blog_edit'] = blogs
+    context['user'] = user
+    # TODO - caso nao logado redirecinar para login
+    return render(request, 'profile.html', context)
+
+
+def edit_blog(request,pk):
+
+    blog = Blog.objects.get(autor=request.user.id, id=pk)
+    form = BlogForm(data=request.POST or None, 
+                    files=request.FILES or None,
+                    instance=blog)
+    context = {}
+    context['forms'] = form
+    context['blog'] = blog
+  
+    return render(request, 'edit_blog.html', context)
+
+
+
+def signin(request):
+    
+    return render(request, 'signin.html')
+
+
+
 
 
 

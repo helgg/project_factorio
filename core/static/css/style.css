@@ -25,10 +25,12 @@ body {
 .custom-form textarea {
     width: -webkit-fill-available;
     border: solid #989898 1px;
+    padding: 5px 10px !important;
 }
 .custom-form input {
     width: -webkit-fill-available;
     border: solid #989898 1px;
+    padding: 5px 10px !important;
 }
 
 .image-blog img {
