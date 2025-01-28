@@ -1,6 +1,6 @@
 
 # Bem-vindo ao **Project Factorio**! 
-Este projeto é uma aplicação desenvolvida para [descrição do propósito do projeto]. 
+Este projeto é uma aplicação desenvolvida em Django para aprendizado. 
 
 ## Índice 
 - [Instalação](#instalação)
