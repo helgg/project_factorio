@@ -3,7 +3,7 @@
 
 
 
-<div class="blog-grid max-w-screen-xl mx-auto mt-1">
+<div class="blog-grid max-w-screen-xl mx-auto">
 
     {% comment %} {% for post in object_list %} {% endcomment %}
     {% for post in posts %}
@@ -12,7 +12,19 @@
     <a href="{% url 'app:article' post.pk %}" class="feature" style="text-decoration: none;">
   
         <div class="w-full h-full rounded-lg border shadow-sm bg-white border-stone-200 shadow-stone-950/5 max-w-[24rem] overflow-hidden">
-            <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000056818/c700b4cc22a81c2099335d83fe379e9cdc6afd190a9985f74ba8f7e589f4ffd2" alt="ui/ux review check" class="w-[calc(100%-16px)] h-max rounded m-2" />
+            
+            <div class="flex justify-center">
+                {% if post.thumbnail %}
+                    <div class="w-full h-48 overflow-hidden rounded m-2">
+                        <img src="{{ post.thumbnail.url }}" alt="ui/ux review check" class="w-full h-full object-cover object-top" />
+                    </div>
+                {% else %}
+                    <div class="w-full h-48 overflow-hidden rounded m-2">
+                        <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000056818/c700b4cc22a81c2099335d83fe379e9cdc6afd190a9985f74ba8f7e589f4ffd2" alt="default thumbnail" class="w-full h-full object-cover object-top" />
+                    </div>
+                {% endif %}
+            </div>
+            
 
             <!-- Título e resumo da postagem -->
         

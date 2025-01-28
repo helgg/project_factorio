@@ -69,7 +69,7 @@ def profile(request):
     context = {}
     context['blog_edit'] = blogs
     context['user'] = user
-    # TODO - caso nao logado redirecinar para login
+    # TODO: Caso nao logado redirecinar para login
     return render(request, 'profile.html', context)
 
 
@@ -79,11 +79,18 @@ def edit_blog(request,pk):
     form = BlogForm(data=request.POST or None, 
                     files=request.FILES or None,
                     instance=blog)
+    
+    if request.method == 'POST':  
+        if form.is_valid():
+            form.save()  
+            return redirect('app:article', pk=blog.id)
+        
     context = {}
     context['forms'] = form
     context['blog'] = blog
   
     return render(request, 'edit_blog.html', context)
+
 
 
 

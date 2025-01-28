@@ -35,6 +35,7 @@ class BlogView(models.Model):
 
 
 class Profile(models.Model):
+    # TODO: Como garantir que ao criar um usuario, um profile seja criado?
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
