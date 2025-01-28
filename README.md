@@ -1,5 +1,5 @@
 
-# Project Factorio Bem-vindo ao **Project Factorio**! 
+# Bem-vindo ao **Project Factorio**! 
 Este projeto é uma aplicação desenvolvida para [descrição do propósito do projeto]. 
 
 ## Índice 
