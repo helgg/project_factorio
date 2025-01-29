@@ -57,6 +57,8 @@ def blog_register(request):
             form = form.save(commit=False)
             if request.POST.get('anonymous'):
                 form.is_anonymous = True
+            else:
+                form.is_anonymous = False
             form.autor = request.user
             form.save()            
     return redirect('app:blogs')
@@ -81,6 +83,11 @@ def edit_blog(request,pk):
     
     if request.method == 'POST':  
         if form.is_valid():
+            form = form.save(commit=False)
+            if request.POST.get('anonymous'):
+                form.is_anonymous = True
+            else:
+                form.is_anonymous = False
             form.save()  
             return redirect('app:article', pk=blog.id)
         
