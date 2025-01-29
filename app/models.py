@@ -12,6 +12,7 @@ class Blog(models.Model):
     unique_views = models.PositiveIntegerField(default=0)
     anonymous_views = models.PositiveIntegerField(default=0)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    is_anonymous = models.BooleanField(default=False)
     thumbnail = models.ImageField(upload_to='thumbnails/', null=True, blank=True)  
 
     def __str__(self):

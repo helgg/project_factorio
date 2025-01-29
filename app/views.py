@@ -56,9 +56,8 @@ def blog_register(request):
         if form.is_valid():
             form = form.save(commit=False)
             if request.POST.get('anonymous'):
-                form.autor = None
-            else:
-                form.autor = request.user
+                form.is_anonymous = True
+            form.autor = request.user
             form.save()            
     return redirect('app:blogs')
 
