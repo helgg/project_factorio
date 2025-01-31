@@ -20,15 +20,15 @@
     {% endif %}
   </div>
 
-  <!-- Data e autor -->
+  <!-- Data e author -->
   <div>
     <div class="text-sm text-gray-500 mb-4">
       <p>
         Escrito por
-        {% if post.is_anonymous or post.autor == None %}
+        {% if post.is_anonymous or post.author == None %}
         <span class="font-semibold">Anônimo</span>
         {% else %}
-        <span class="font-semibold">{{ post.autor }}</span>
+        <span class="font-semibold">{{ post.author }}</span>
         {% endif %} em {{ post.create_at|date:"F d" }}
       </p>
     </div>

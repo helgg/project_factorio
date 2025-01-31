@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- TODO: Não sei o motivo pelo qual o usuario nao é identificado nessa tela -->
 <div class="max-w-screen-xl mx-auto">
   <div class="grid grid-cols-3 gap-5">
     {% comment %} Profile {% endcomment %}
     <div class="container mx-auto flex justify-center items-start h-screen">
       <div class="bg-white shadow-xl rounded-2xl p-6 flex flex-col items-center w-full">
         <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-300 mb-4">
-          {% if user.profile_photo %}
+          {% if profile.profile_photo %}
 
-          <img src="{{ user.profile_photo.url}}" alt="profile image" class="w-full h-full object-cover" />
+          <img src="{{ profile.profile_photo.url}}" alt="profile image" class="w-full h-full object-cover" />
 
           {% else%}
 
@@ -17,20 +16,21 @@
 
           {% endif %}
         </div>
-        <h2 class="text-2xl font-bold text-gray-800">{{ user.first_name }} {{ user.last_name }}</h2>
-        <p class="text-gray-600 text-center mt-2">{{ user.bio }}</p>
+        <h2 class="text-2xl font-bold text-gray-800">{{ request.user.first_name }} {{ request.user.last_name }}</h2>
+        <h5 class="font-bold text-gray-800">{{ profile.user.email }}</h5>
+        <p class="text-gray-600 text-center mt-2">{{ profile.bio }}</p>
         <div class="mt-4 space-x-4">
           <button
             class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased">
             Editar
           </button>
           <span class="bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 transition">
-            Postagens: {{ user.blog_count }}
+            Postagens: {{ profile.blog_count }}
           </span>
         </div>
         <div class="w-full mt-6">
           <h3 class="text-lg font-semibold text-gray-800 mb-2">Sobre</h3>
-          <p class="text-gray-600 text-sm text-justify">{{ user.bio_details }}</p>
+          <p class="text-gray-600 text-sm text-justify">{{ profile.bio_details }}</p>
         </div>
       </div>
     </div>
