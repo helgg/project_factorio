@@ -27,6 +27,7 @@
           <small class="font-sans antialiased text-sm text-current">Blogs</small>
         </a>
         <!-- Form  -->
+        {% if request.user.is_authenticated %}
         <a href="{% url 'app:post' %}"
           class="flex items-center py-1.5 px-2.5 rounded-md align-middle select-none font-sans transition-all duration-300 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none bg-transparent text-stone-600 hover:bg-stone-200 focus:bg-stone-200 focus:text-stone-800 dark:focus:text-white dark:data-[selected=true]:text-white dark:bg-opacity-70">
           <span class="grid place-items-center shrink-0 me-2.5 mr-1.5"><svg width="1.5em" height="1.5em"
@@ -42,6 +43,7 @@
           </span>
           <small class="font-sans antialiased text-sm text-current">Post</small>
         </a>
+        {% endif %}
         <!-- Profile -->
         {% if request.user.is_authenticated %}
         <a href="{% url 'app:profile' %}"
@@ -62,7 +64,7 @@
           <small class="font-sans antialiased text-sm text-current">Acount</small>
         </a>
         {% else %}
-        <a href="{% url 'app:signin' %}"
+        <a href="{% url 'app:login' %}"
           class="flex items-center py-1.5 px-2.5 rounded-md align-middle select-none font-sans transition-all duration-300 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none bg-transparent text-stone-600 hover:bg-stone-200 focus:bg-stone-200 focus:text-stone-800 dark:focus:text-white dark:data-[selected=true]:text-white dark:bg-opacity-70">
           <span class="grid place-items-center shrink-0 me-2.5 mr-1.5"><svg width="1.5em" height="1.5em"
               stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"
@@ -108,7 +110,7 @@
       class=" object-cover object-center w-9 h-9 rounded outline-none group border border-stone-400 p-0.5 lg:ml-auto rounded-full" />
     </a>
     {% else %}
-    <a href="{% url 'app:signin' %}" class="inline-block outline-none group lg:ml-auto">
+    <a href="{% url 'app:login' %}" class="inline-block outline-none group lg:ml-auto">
       <img aria-expanded="false" aria-haspopup="menu"
         src="https://avatar.iran.liara.run/public"
         alt="profile-picture"

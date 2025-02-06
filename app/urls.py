@@ -11,7 +11,8 @@ urlpatterns = [
     path('post', views.make_a_post, name="post"),
     path('profile', views.profile, name='profile'),
     path('edit_blog/<int:pk>', views.edit_blog, name='edit_blog'),
-    path('signin', views.signin, name='signin'),
+    path('login', views.user_login, name='login'),
+    # path('signin', views.signin, name='signin'),
 ]
 
 

@@ -2,9 +2,12 @@
 import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.models import User
+from authentication.models import User
 from .models import Blog, BlogView, Profile
 from .forms import BlogForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 
 # renderiza a home
 def home(request):
@@ -71,7 +74,7 @@ def blog_article(request, pk):
     context['post'] = blog
     return render(request, 'blog_post.html', context)
 
-
+@login_required
 def blog_register(request):    
     form = BlogForm(request.POST, request.FILES)
     if request.method == 'POST':
@@ -85,7 +88,7 @@ def blog_register(request):
             form.save()            
     return redirect('app:blogs')
 
-
+@login_required
 def profile(request):
     try:
         user = Profile.objects.get(user=request.user.id)
@@ -129,13 +132,38 @@ def edit_blog(request,pk):
     return render(request, 'edit_blog.html', context)
 
 
+def user_login(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None: 
+                # TODO: Tratativa de erros de login
+                login(request, user)
+                return redirect('/') 
+    else:
+        form = AuthenticationForm()
 
-
-def signin(request):
+    context = {}
+    context['form'] = form
     
-    return render(request, 'signin.html')
+    return render(request, 'login.html', context)
 
 
+
+# def signin(request):
+#     if request.method == 'POST':
+#         form = SigninForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             login(request, user)
+#             return redirect('home')
+#     else:
+#         form = SigninForm()
+    
+#     return render(request, 'signin.html')
 
 
 

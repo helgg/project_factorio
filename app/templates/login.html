@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
+
+    {% if form.errors %}
+    <p class="text-red-500 text-center">Usuário ou senha incorretos.</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-4 custom-form">
+            <label class="block text-gray-700">Usuário</label>
+            {{ form.username }}
+        </div>
+        <div class="mb-4 custom-form">
+            <label class="block text-gray-700 ">Senha</label>
+            {{ form.password }}
+        </div>
+        <div class="flex justify-around">
+            <button type="submit"
+                class="inline-flex items-center justify-center center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased w-48">
+                Entrar
+            </button>
+            <a href="{% url 'app:signin' %}"
+                class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-red-950 hover:bg-red-800 relative bg-gradient-to-b from-red-900 to-red-950 border-red-950 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-red-850 hover:to-red-900 hover:border-red-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased w-48">Cadastre-se</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
