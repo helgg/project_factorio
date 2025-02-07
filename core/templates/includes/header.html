@@ -103,20 +103,20 @@
       </svg>
     </button>
     {% if request.user.is_authenticated %}
+
+      {% if request.user.profile %}
+
     <a href="{% url 'app:profile' %}" class="inline-block outline-none group lg:ml-auto">
-    <img aria-expanded="false" aria-haspopup="menu"
-      src="{{ profile.profile_photo.url }}"
-      alt="profile-picture"
-      class=" object-cover object-center w-9 h-9 rounded outline-none group border border-stone-400 p-0.5 lg:ml-auto rounded-full" />
-    </a>
+      <img aria-expanded="false" aria-haspopup="menu" src="{{ request.user.profile_photo.url }}" alt="profile-picture"
+        class=" object-cover object-center w-9 h-9 rounded outline-none group border border-stone-400 p-0.5 lg:ml-auto rounded-full" />
+    </a>{% endif %}
+
     {% else %}
     <a href="{% url 'app:login' %}" class="inline-block outline-none group lg:ml-auto">
-      <img aria-expanded="false" aria-haspopup="menu"
-        src="https://avatar.iran.liara.run/public"
-        alt="profile-picture"
+      <img aria-expanded="false" aria-haspopup="menu" src="https://avatar.iran.liara.run/public" alt="profile-picture"
         class=" object-cover object-center w-9 h-9 rounded outline-none group border border-stone-400 p-0.5 lg:ml-auto rounded-full" />
-      </a>
-      {% endif %}
+    </a>
+    {% endif %}
   </div>
 
 </nav>

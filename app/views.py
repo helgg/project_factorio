@@ -1,9 +1,9 @@
 
 import datetime
 
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from authentication.models import User
-from .models import Blog, BlogView, Profile
+from .models import Blog, BlogView
 from .forms import BlogForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 # renderiza a home
 def home(request):
     try:
-        user = Profile.objects.get(user=request.user.id)
+        user = User.objects.get(user=request.user.id)
     except Exception:
         user = 'sem usuario logado'
 
@@ -25,7 +25,7 @@ def home(request):
 # renderiza o catalogo de blogs (postagens)
 def blogs(request):
     try:
-        user = Profile.objects.get(user=request.user.id)
+        user = User.objects.get(user=request.user.id)
     except Exception:
         user = 'sem usuario logado'
 
@@ -38,7 +38,7 @@ def blogs(request):
 # renderiza o form de postagem
 def make_a_post(request):
     try:
-        user = Profile.objects.get(user=request.user.id)
+        user = User.objects.get(user=request.user.id)
     except Exception:
         user = 'sem usuario logado'
     context = {}
@@ -66,7 +66,7 @@ def blog_article(request, pk):
     blog.views = blog.unique_views + blog.anonymous_views
     blog.save()
     try:
-        user = Profile.objects.get(user=request.user.id)
+        user = User.objects.get(user=request.user.id)
     except Exception:
         user = 'sem usuario logado'
     context = {}
@@ -88,17 +88,17 @@ def blog_register(request):
             form.save()            
     return redirect('app:blogs')
 
-@login_required
+@login_required(login_url="/login")
 def profile(request):
     try:
-        user = Profile.objects.get(user=request.user.id)
+        user = User.objects.get(user=request.user.id)
     except Exception:
         user = 'sem usuario logado'
     blogs = Blog.objects.filter(author=request.user.id)
     context = {}
-    context['blog_edit'] = blogs
+    context['blog'] = blogs
     context['profile'] = user
-    # TODO: Caso nao logado redirecinar para login
+    # TODO: Caso nao logado renderizar para login
     
     return render(request, 'profile.html', context)
 
@@ -121,7 +121,7 @@ def edit_blog(request,pk):
             return redirect('app:article', pk=blog.id)
         
     try:
-        user = Profile.objects.get(user=request.user.id)
+        user = User.objects.get(user=request.user.id)
     except Exception:
         user = 'sem usuario logado'
     context = {}
@@ -153,17 +153,9 @@ def user_login(request):
 
 
 
-# def signin(request):
-#     if request.method == 'POST':
-#         form = SigninForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('home')
-#     else:
-#         form = SigninForm()
-    
-#     return render(request, 'signin.html')
+def signin(request):
+
+    return render(request, 'signin.html')
 
 
 
