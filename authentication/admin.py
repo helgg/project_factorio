@@ -1,22 +1,24 @@
 from django.contrib import admin
-from django.contrib.auth import admin as auth_admin
-from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User
 
+class UserAdmin(BaseUserAdmin):
+    ordering = ['email']
+    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_active')
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Informações Pessoais', {'fields': ('first_name', 'last_name', 'bio_details', 'profile_photo')}),
+        ('Permissões', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups')}),
+        ('Datas Importantes', {'fields': ('last_login',)}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active')}
+        ),
+    )
+    search_fields = ('email',)
+    ordering = ('email',)
+    filter_horizontal = ('groups',)
 
-@admin.register(User)
-class UserAdmin(auth_admin.UserAdmin):
-    model = User
-    list_display = 'first_name', 'last_name', 'username', 'id'
-    list_display_links = 'first_name', 'username', 'id',
-    search_fields = ('id', 'first_name', 'username')
-    
-    fieldsets = ((None, {'fields': ('username', 'password', 'id', 'bio_details', 'profile_photo')}),
-                 (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
-                 (_('Permissions'), {'fields': ('is_active', 'is_superuser', 'groups',),}),
-                 (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-                 )
-    readonly_fields = ('id', 'last_login', 'date_joined')
-
-
-
+admin.site.register(User, UserAdmin)

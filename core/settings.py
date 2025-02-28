@@ -58,10 +58,10 @@ MIDDLEWARE = [
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
-LOGIN_URL = '/'
+LOGIN_URL = '/home'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_URL = '/home'
+LOGOUT_REDIRECT_URL = '/' 
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '78119813743-hr6s7cs03b1mnlneflq9q0v91b3ppv5b.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'

@@ -83,14 +83,14 @@
         </a>
         {% endif %}
         <!-- Admin -->
-        {% if request.user.is_authenticated %}
+        
         <a href="/admin/"
           class="flex items-center py-1.5 px-2.5 rounded-md align-middle select-none font-sans transition-all duration-300 ease-in aria-disabled:opacity-50 aria-disabled:pointer-events-none bg-transparent text-stone-600 hover:bg-stone-200 focus:bg-stone-200 focus:text-stone-800 dark:focus:text-white dark:data-[selected=true]:text-white dark:bg-opacity-70">
           <span class="grid place-items-center shrink-0 me-2.5 mr-1.5"><i class="fa-solid fa-gear h-4 w-4"></i>
           </span>
           <small class="font-sans antialiased text-sm text-current">Admin</small>
         </a>
-        {% endif %}
+        
       </ul>
     </div>
     <button
