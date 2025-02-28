@@ -30,7 +30,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'authentication',
+    'social_django',
 
+]
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MIDDLEWARE = [
@@ -43,8 +49,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '78119813743-hr6s7cs03b1mnlneflq9q0v91b3ppv5b.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 ROOT_URLCONF = 'core.urls'
 
@@ -61,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },

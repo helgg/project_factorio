@@ -132,30 +132,30 @@ def edit_blog(request,pk):
     return render(request, 'edit_blog.html', context)
 
 
-def user_login(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None: 
-                # TODO: Tratativa de erros de login
-                login(request, user)
-                return redirect('/') 
-    else:
-        form = AuthenticationForm()
+# def user_login(request):
+#     if request.method == "POST":
+#         form = AuthenticationForm(request, data=request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get('password')
+#             user = authenticate(request, username=username, password=password)
+#             if user is not None: 
+#                 # TODO: Tratativa de erros de login
+#                 login(request, user)
+#                 return redirect('/') 
+#     else:
+#         form = AuthenticationForm()
 
-    context = {}
-    context['form'] = form
+#     context = {}
+#     context['form'] = form
     
-    return render(request, 'login.html', context)
+#     return render(request, 'login.html', context)
 
 
 
-def signin(request):
+# def signin(request):
 
-    return render(request, 'signin.html')
+#     return render(request, 'signin.html')
 
 
 
