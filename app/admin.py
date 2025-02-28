@@ -4,9 +4,9 @@ from .models import Blog, BlogView
 # Register your models here.
 
 @admin.register(Blog)
-class BlogAdmin(admin.ModelAdmin):
+class Blog(admin.ModelAdmin):
     ...
 
 @admin.register(BlogView)
-class BlogAdmin(admin.ModelAdmin):
+class BlogView(admin.ModelAdmin):
     ...

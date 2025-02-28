@@ -5,8 +5,6 @@ from django.shortcuts import render, redirect
 from authentication.models import User
 from .models import Blog, BlogView
 from .forms import BlogForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
 # renderiza a home

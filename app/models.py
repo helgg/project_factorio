@@ -14,6 +14,10 @@ class Blog(models.Model):
     is_anonymous = models.BooleanField(default=False)
     thumbnail = models.ImageField(upload_to='thumbnails/', null=True, blank=True)  
 
+    # @property
+    # def blog_count(self):
+    #     return Blog.objects.filter(author=self).count()
+
     def __str__(self):
         author_name = self.author.get_full_name() if self.author else "Anônimo"
         return f"{self.title} - {author_name}"
