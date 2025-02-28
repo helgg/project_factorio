@@ -28,11 +28,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # custom apps
     'app',
     'authentication',
-    'social_django',
 
+    # third party apps
+    'social_django',
+    'tailwind',
+    'theme',
+    'django_browser_reload'
 ]
+
+TAILWIND_APP_NAME = 'theme'
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
@@ -47,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 LOGIN_URL = '/'
@@ -133,8 +142,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/' 
 STATIC_ROOT = os.path.join(CORE_DIR, 'static/') 
+
+TAILWIND_CSS_PATH = 'css/dist/styles.css'
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'core/static') 
+    os.path.join(BASE_DIR, 'core/static'),
+    os.path.join(BASE_DIR, 'theme/static'),
 ] 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(CORE_DIR, 'media/') 
